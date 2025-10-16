@@ -1,9 +1,9 @@
 <?php
 
-require 'data.php';
+require 'data.php'; #requisito meus dados
 
-$view = "index";
+$view = "index"; #torno a view a page index
 
-require "views/template/app.php";
+require "views/template/app.php"; #requisito meu template
 
 ?>

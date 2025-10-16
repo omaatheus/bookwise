@@ -1,15 +1,15 @@
 <?php
 
-require 'data.php';
+require 'data.php'; # requisito meus dados
 
-$id = $_REQUEST['id'];
+$id = $_REQUEST['id']; #requisito o id que vem da minha super global
 
-$filtrado = array_filter($livros, fn($l) =>  $l['id'] == $id);
+$filtrado = array_filter($livros, fn($l) =>  $l['id'] == $id); #faço um filtro em livros para achar o id que quero
 
-$livro = array_pop($filtrado);
+$livro = array_pop($filtrado); # subtraio tudo dessa array do id
 
-$view = "livro";
+$view = "livro"; #torno a view a page "livro"
 
-require "views/template/app.php";
+require "views/template/app.php"; #requisito meu template
 
 ?>
