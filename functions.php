@@ -1,10 +1,15 @@
 <?php 
 
-function view($view){
+function view($view, $data = []) {
 
-    require "views/template/app.php";
+    foreach($data as $key => $value) {
 
-}
+        $$key = $value;
+
+    };
+
+     require 'views/template/app.php';
+};
 
 function dumpAndDie($dump){
     var_dump($dump);

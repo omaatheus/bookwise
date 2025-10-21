@@ -1,5 +1,6 @@
 <?php
 
+require 'functions.php';
 
-require 'routes.php'
+require 'routes.php';
 ?>

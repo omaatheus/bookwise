@@ -1,5 +1,4 @@
 <?php 
-require 'functions.php';
 
 $controller = str_replace('/', '', parse_url($_SERVER['PATH_INFO'])['path']);
 

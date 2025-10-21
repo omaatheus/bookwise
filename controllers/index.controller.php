@@ -1,6 +1,7 @@
 <?php
 
-require 'data.php'; #requisito meus dados
+require 'data.php';
 
-view("index")
+view('index', compact('livros'));
+
 ?>

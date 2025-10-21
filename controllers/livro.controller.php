@@ -1,7 +1,6 @@
 <?php
 
-require 'data.php'; # requisito meus dados
-require 'functions.php';
+require 'data.php';
 
 $id = $_REQUEST['id']; #requisito o id que vem da minha super global
 
@@ -9,5 +8,5 @@ $filtrado = array_filter($livros, fn($l) =>  $l['id'] == $id); #faço um filtro 
 
 $livro = array_pop($filtrado); # subtraio tudo dessa array do id
 
-view('livro')
+view('livro', compact('livro'));
 ?>
