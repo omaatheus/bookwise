@@ -1,6 +1,7 @@
 <?php
 
 require 'data.php'; # requisito meus dados
+require 'functions.php';
 
 $id = $_REQUEST['id']; #requisito o id que vem da minha super global
 
@@ -8,8 +9,5 @@ $filtrado = array_filter($livros, fn($l) =>  $l['id'] == $id); #faço um filtro 
 
 $livro = array_pop($filtrado); # subtraio tudo dessa array do id
 
-$view = "livro"; #torno a view a page "livro"
-
-require "views/template/app.php"; #requisito meu template
-
+view('livro')
 ?>
