@@ -14,15 +14,32 @@ CREATE SCHEMA IF NOT EXISTS `bookwise-db` DEFAULT CHARACTER SET utf8mb4 COLLATE 
 USE `bookwise-db`;
 
 -- -----------------------------------------------------
--- Table `estacionar-db`.`cars_parked`
+-- Table `estacionar-db`.`users`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bookwise-db`.`books` (
-  `id` INT NOT NULL,
-  `title` VARCHAR(255),
-  `author` VARCHAR(100),
-  `description` TEXT,
+
+CREATE TABLE IF NOT EXISTS `bookwise-db`.`users` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255) NOT NULL,
+  `email` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `ID_UNIQUE` (`id` ASC) VISIBLE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- -----------------------------------------------------
+-- Table `estacionar-db`.`books`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bookwise-db`.`books` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `title` VARCHAR(255) NOT NULL,
+  `author` VARCHAR(100) NOT NULL,
+  `description` TEXT NOT NULL,
+  `release_year` INT NOT NULL,
+  `user_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `ID_UNIQUE` (`id` ASC),
+  FOREIGN KEY (`user_id`) REFERENCES `bookwise-db`.`users`(`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 SET SQL_MODE=@OLD_SQL_MODE;
