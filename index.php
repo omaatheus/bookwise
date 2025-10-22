@@ -1,6 +1,11 @@
 <?php
 
-require 'functions.php';
+require "functions.php";
 
-require 'routes.php';
+require "models/Livro.php";
+
+require "db/database.php";
+
+require "routes.php";
+
 ?>
