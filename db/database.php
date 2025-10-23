@@ -2,7 +2,7 @@
 
 class DB{
 
-    public function livros(){
+    public function livros($id = null){
 
         $host = '127.0.0.1';
         $port = '3307'; 
@@ -21,7 +21,12 @@ class DB{
 
         $pdo = new PDO($dsn, $user, $pass, $options);
 
-        $query = $pdo->query("select * from books");
+        $sql = "select * from books";
+        if (!is_null($id)){
+            $sql .= " where id = " . $id;
+        }
+
+        $query = $pdo->query($sql);
         $itens = $query->fetchAll();
 
         $retorno = [];
@@ -37,8 +42,6 @@ class DB{
             $retorno []= $livro;
 
         }
-
-
         return $retorno;
     }
 };
