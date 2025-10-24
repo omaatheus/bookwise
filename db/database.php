@@ -25,7 +25,7 @@ class DB
         return $pdo;
     }
 
-    public function livros($id = null)
+    public function livros()
     {
 
         $pdo = $this->getConnection();
@@ -35,20 +35,8 @@ class DB
         $query = $pdo->query($sql);
         $itens = $query->fetchAll();
 
-        $retorno = [];
 
-        foreach ($itens as $item) {
-            $livro = new Livro;
-
-            $livro->id = $item['id'];
-            $livro->title = $item['title'];
-            $livro->author = $item['author'];
-            $livro->description = $item['description'];
-
-            $retorno[] = $livro;
-
-        }
-        return $retorno;
+        return array_map(fn($item) => Livro::make($item), $itens);
     }
 
     public function livro($id)
@@ -59,25 +47,10 @@ class DB
         $query = $pdo->query($sql);
         $itens = $query->fetchAll();
 
-        $retorno = [];
+        return array_map(fn($item) => Livro::make($item), $itens)[0];
 
-        foreach ($itens as $item) {
-            $livro = new Livro;
 
-            $livro->id = $item['id'];
-            $livro->title = $item['title'];
-            $livro->author = $item['author'];
-            $livro->description = $item['description'];
-
-            $retorno[] = $livro;
-
-        }
-        return $retorno[0];
     }
-
-
 }
-;
-
 
 ?>
