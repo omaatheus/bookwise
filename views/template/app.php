@@ -24,10 +24,11 @@
     </header>
 
     <main class="mx-auto max-w-screen-lg space-y-6">
-        
-        <?php require "views/{$view}.view.php"; ?>  <!-- Estou requisitando de views a minha view, essa variavel view eu recupero da minha superglobal-->
-      
-            
+
+        <?php require "views/{$view}.view.php"; ?>
+        <!-- Estou requisitando de views a minha view, essa variavel view eu recupero da minha superglobal-->
+
+
     </main>
 
 </body>

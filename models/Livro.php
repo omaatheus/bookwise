@@ -1,6 +1,7 @@
-<?php 
+<?php
 
-class Livro {
+class Livro
+{
     public $id;
     public $title;
     public $author;

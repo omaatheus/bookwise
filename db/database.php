@@ -1,15 +1,16 @@
-<?php 
+<?php
 
-class DB{
+class DB
+{
 
-    public function livros($id = null){
-
+    private function getConnection()
+    {
         $host = '127.0.0.1';
-        $port = '3307'; 
-        $database = 'bookwise-db';  
-        $user = 'admin';   
-        $pass = 'bookwise123';      
-        $charset = 'utf8mb4';    
+        $port = '3307';
+        $database = 'bookwise-db';
+        $user = 'admin';
+        $pass = 'bookwise123';
+        $charset = 'utf8mb4';
 
         $dsn = "mysql:host=$host;port=$port;dbname=$database;charset=$charset";
 
@@ -21,17 +22,22 @@ class DB{
 
         $pdo = new PDO($dsn, $user, $pass, $options);
 
+        return $pdo;
+    }
+
+    public function livros($id = null)
+    {
+
+        $pdo = $this->getConnection();
+
         $sql = "select * from books";
-        if (!is_null($id)){
-            $sql .= " where id = " . $id;
-        }
 
         $query = $pdo->query($sql);
         $itens = $query->fetchAll();
 
         $retorno = [];
 
-        foreach($itens as $item){
+        foreach ($itens as $item) {
             $livro = new Livro;
 
             $livro->id = $item['id'];
@@ -39,12 +45,39 @@ class DB{
             $livro->author = $item['author'];
             $livro->description = $item['description'];
 
-            $retorno []= $livro;
+            $retorno[] = $livro;
 
         }
         return $retorno;
     }
-};
+
+    public function livro($id)
+    {
+        $pdo = $this->getConnection();
+        $sql = "select * from books where id =" . $id;
+
+        $query = $pdo->query($sql);
+        $itens = $query->fetchAll();
+
+        $retorno = [];
+
+        foreach ($itens as $item) {
+            $livro = new Livro;
+
+            $livro->id = $item['id'];
+            $livro->title = $item['title'];
+            $livro->author = $item['author'];
+            $livro->description = $item['description'];
+
+            $retorno[] = $livro;
+
+        }
+        return $retorno[0];
+    }
+
+
+}
+;
 
 
 ?>
