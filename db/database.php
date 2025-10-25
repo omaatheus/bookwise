@@ -25,29 +25,15 @@ class DB
         return $pdo;
     }
 
-    public function livros($pesquisa = null)
+    public function query($query, $class = null, $params = [])
     {
-        $prepare = $this->getConnection()->prepare("select * from books where user_id = 1 and title like :pesquisa");
-        $prepare->bindValue(":pesquisa", "%$pesquisa%");
-        $prepare->execute();
+        $prepare = $this->getConnection()->prepare($query);
+        if ($class) {
+            $prepare->setFetchMode(PDO::FETCH_CLASS, $class);
+        }
+        $prepare->execute($params);
 
-        return $prepare->fetchAll(PDO::FETCH_CLASS, Livro::class);
-
-
-        
-    }
-
-    public function livro($id)
-    {
-        $pdo = $this->getConnection();
-        $sql = "select * from books where id =" . $id;
-
-        $prepare = $this->getConnection()->prepare("select * from books where id = :id");
-        $prepare->bindValue(":id", $id);
-        $prepare->setFetchMode(PDO::FETCH_CLASS, Livro::class);
-        $prepare->execute();
-        return $prepare->fetch();
-
+        return $prepare;
     }
 }
 
