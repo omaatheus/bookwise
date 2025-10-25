@@ -1,10 +1,6 @@
 <?php
 
-$id = $_REQUEST['id'];  #requisito o id que vem da minha super global
-
-$db = new DB();
-
-$livro = $db->livro($id);
+$livro = (new DB)->livro($_REQUEST['id']);
 
 view('livro', compact('livro'));
 ?>

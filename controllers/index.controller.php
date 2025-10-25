@@ -1,6 +1,8 @@
 <?php
 
-$livros = (new DB)->livros();
+$search = $_REQUEST["pesquisar"] ?? "";
+
+$livros = (new DB)->livros($search);
 
 view('index', compact('livros'));
 
