@@ -16,11 +16,17 @@ function view($view, $data = [])
 
 function dumpAndDie($dump)
 {
-    var_dump($dump);
+    dump($dump);
 
-    die();
+    exit();
 }
 ;
+
+function dump(...$dump){
+    echo '<pre>';
+    var_dump($dump);
+    echo '</pre>';
+};
 
 function abort($code)
 {
