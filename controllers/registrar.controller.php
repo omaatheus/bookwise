@@ -1,36 +1,87 @@
-<?php 
+<?php
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+require 'Validacao.php';
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    $validacao = Validacao::validar([
+
+        'nome' => ['required'],
+        'email' => ['required', 'email', 'confirmed'],
+        // 'senha' => ['required', 'min:8', 'max:30', 'strong']
+
+    ], $_POST);
+
+    if ($validacao->naoPassou()) {
+
+        $_SESSION['validacoes'] = $validacao->validacoes;
+
+        header("Location: /login");
+
+        exit();
+
+    }
 
     $validacoes = [];
+
     $nome = $_POST['nome'];
+
     $email = $_POST['email'];
-    $password = $_POST['password'];
+
     $email_confirmacao = $_POST['email_confirmacao'];
 
-    if(strlen($nome) == 0){
-        $validacoes []= 'O nome é obrigatório.';
-    }
-    if(strlen($email) == 0){
-        $validacoes []= 'O email é obrigatório.';
-    }
-    if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-        $validacoes []= 'O Email é invalido';
-    }
-    if($email != $email_confirmacao){
-        $validacoes [] = 'O Email de confirmação é diferente';
-    }
-    if(strlen($password) == 0){
-        $validacoes []= 'A senha é obrigatória.';
-    }
-    if(strlen($password) < 6 || strlen($password) > 30){
-        $validacoes []= 'A senha precisa ter entre 8 e 30 caracteres.';
+    $senha = $_POST['password'];
+
+    if (strlen($nome) == 0) {
+
+        $validacoes[] = 'O nome é obrigatório.';
+
     }
 
-    if(sizeof($validacoes) > 0){
+    if (strlen($email) == 0) {
+
+        $validacoes[] = 'O email é obrigatório.';
+
+    }
+
+    if (! filter_var($email, FILTER_VALIDATE_EMAIL)) {
+
+        $validacoes[] = 'O email é inválido.';
+
+    }
+
+    if ($email != $email_confirmacao) {
+
+        $validacoes[] = 'O email de confirmação está diferente.';
+
+    }
+
+    if (strlen($senha) == 0) {
+
+        $validacoes[] = 'A senha é obrigatória.';
+
+    }
+
+    if (strlen($senha) < 8 || strlen($senha) > 30) {
+
+        $validacoes[] = 'A senha precisa ter entre 8 e 30 caracteres.';
+
+    }
+
+    if (!str_contains($senha, '*')) {
+
+        $validacoes[] = 'A senha precisa um * nela.';
+
+    }
+
+    if (sizeof($validacoes) > 0) {
+
         $_SESSION['validacoes'] = $validacoes;
-        header('location: /login');
+
+        header("Location: /login");
+
         exit();
+
     }
 
 (new DB)->query(
@@ -42,9 +93,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     ]
 );
 
-header('location: /login?mensagem=Registrado com sucesso!');
-exit();
+    header('location: /login?mensagem=Registrado com sucesso!');
 
-}
+    exit();
 
-?>
+};
