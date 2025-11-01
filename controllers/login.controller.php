@@ -8,14 +8,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     $usuario = (new DB)->query(
         query: "select * from users where email = :email and password = :senha ", 
+        class: Usuario::class,
         params: [
             "email" => $email,
             "senha" => $senha,
-        ])->fetch();
+        ]
+        )->fetch();
 
     if($usuario){
         $_SESSION['auth'] = $usuario;
-        $_SESSION['mensagem'] = 'Seja bem vindo'. $usuario['name'] . '!';
+        $_SESSION['mensagem'] = 'Seja bem vindo'. $usuario->name . '!';
         header('location: /');
         exit();
     }
