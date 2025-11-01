@@ -19,7 +19,21 @@ class Validacao {
 
                     $validacao->$regra($campo, $valorDoCampo, $dados["{$campo}_confirmacao"]);
                         
-                } else {
+                }
+                
+                else if (str_contains($regra, ':')) {
+
+                    $temp = explode(':', $regra);
+
+                    $regra = $temp[0];
+
+                    $regraAr = $temp[1];
+
+                    $validacao->$regra($regraAr, $campo, $valorDoCampo);
+
+                }
+                
+                else {
 
                     $validacao->$regra($campo, $valorDoCampo);
 
@@ -69,8 +83,42 @@ class Validacao {
     public function naoPassou()
     {
 
+        $_SESSION['validacoes'] = $validacao->validacoes;
+
         return sizeof($this->validacoes) > 0;
 
     }
 
+    private function min($min, $campo, $valor) {
+
+        if (strlen($valor) <= $min) {
+
+            $this->validacoes[] = "O $campo precisa ter um mínimo de $min caracteres.";
+
+        }
+
+    }
+
+    private function max($max, $campo, $valor) {
+
+        if (strlen($valor) > $max) {
+
+            $this->validacoes[] = "O $campo precisa ter um máximo de $max caracteres.";
+
+        }
+
+    }
+
+    private function strong($campo, $valor)
+    {
+
+        if (! strpbrk($valor, "!#$%&'()*+,-./:;<=>?@[\]^_`{|}~")) {
+
+            $this->validacoes[] = "A $campo precisa um caractere especial nela.";
+    
+        }
+
+    }
+
 }
+?>
