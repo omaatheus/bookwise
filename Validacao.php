@@ -19,7 +19,7 @@ class Validacao {
 
                     $validacao->$regra($campo, $valorDoCampo, $dados["{$campo}_confirmacao"]);
                         
-                }
+                } 
                 
                 else if (str_contains($regra, ':')) {
 
@@ -80,15 +80,6 @@ class Validacao {
 
     }
 
-    public function naoPassou()
-    {
-
-        $_SESSION['validacoes'] = $this->validacoes;
-
-        return sizeof($this->validacoes) > 0;
-
-    }
-
     private function min($min, $campo, $valor) {
 
         if (strlen($valor) <= $min) {
@@ -120,5 +111,13 @@ class Validacao {
 
     }
 
+    public function naoPassou()
+    {
+
+        $_SESSION['validacoes'] = $this->validacoes;
+
+        return sizeof($this->validacoes) > 0;
+
+    }
+
 }
-?>
