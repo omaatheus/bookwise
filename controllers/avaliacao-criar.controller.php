@@ -11,8 +11,8 @@ $rating = $_POST['avaliacao'];
 $note = $_POST['nota'];
 
 $validacao = Validacao::validar([
-    'rating' => ['required'],
-    'note' => ['required']
+    'avaliacao' => ['required'],
+    'nota' => ['required']
 ], $_POST);
 
 if($validacao->naoPassou()){
