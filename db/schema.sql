@@ -43,6 +43,26 @@ CREATE TABLE IF NOT EXISTS `bookwise-db`.`books` (
     ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- -----------------------------------------------------
+-- Table `estacionar-db`.`reviews`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bookwise-db`.`reviews` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `user_id` INT NOT NULL,
+  `book_id` INT NOT NULL,
+  `rating` TEXT,
+  `note` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `ID_UNIQUE` (`id` ASC),
+  FOREIGN KEY (`user_id`) REFERENCES `bookwise-db`.`users`(`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  FOREIGN KEY (`book_id`) REFERENCES `bookwise-db`.`books`(`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
