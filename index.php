@@ -5,6 +5,8 @@ require "Validacao.php";
 
 session_start();
 
+require "Flash.php";
+
 require "functions.php";
 
 require "db/database.php";

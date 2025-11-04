@@ -18,7 +18,7 @@
                 <li><a href="/meus-livros" class="hover:underline">Meus Livros</a></li>
             </ul>
             <ul>
-                    <?php if (isset($_SESSION['auth'])): ?>
+                <?php if (isset($_SESSION['auth'])): ?>
 
                     <li><a href="/logout">Olá, <?= $_SESSION['auth']->name ?></a></li>
 
@@ -32,6 +32,16 @@
     </header>
 
     <main class="mx-auto max-w-screen-lg space-y-6">
+
+        <?php if ($mensagem = flash()->get('mensagem')): ?>
+
+            <div class="border-green-800 bg-green-900 text-green-400 px-4 py-1 rounded-md border-2 text-sm font-bold">
+
+                <?= $mensagem ?>
+
+            </div>
+
+        <?php endif; ?>
 
         <?php require "views/{$view}.view.php"; ?>
         <!-- Estou requisitando de views a minha view, essa variavel view eu recupero da minha superglobal-->

@@ -1,10 +1,16 @@
 <?php 
 
-$mensagem = $_REQUEST['mensagem'] ?? '';
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $email = $_POST['email'];
     $senha = $_POST['password'];
+
+    if ($validacao->naoPassou('login')) {
+
+        header("Location: /login");
+
+        exit();
+
+    }
 
     $usuario = (new DB)->query(
         query: "select * from users where email = :email and password = :senha ", 
@@ -17,13 +23,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     if($usuario){
         $_SESSION['auth'] = $usuario;
-        $_SESSION['mensagem'] = 'Seja bem vindo'. $usuario->name . '!';
+        flash()->push('mensagem', "Seja bem-vindo" . $usuario->nome . "!");
         header('location: /');
         exit();
     }
 
 }   
 
-view('login', compact('mensagem'));
+view('login');
 
 ?>

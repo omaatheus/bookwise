@@ -36,5 +36,9 @@ function abort($code)
 
     die();
 }
+function flash() {
 
+    return new Flash;
+
+}
 ?>
