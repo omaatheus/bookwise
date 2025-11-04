@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $validacao = Validacao::validar([
 
         'nome' => ['required'],
-        'email' => ['required', 'email', 'confirmed'],
+        'email' => ['required', 'email', 'confirmed', 'unique:users'],
         'password' => ['required', 'min:8', 'max:30', 'strong']
 
     ], $_POST);
@@ -34,3 +34,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     exit();
 
 };
+
+header('location: /login');
+exit();

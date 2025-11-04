@@ -5,11 +5,11 @@
         <form class="p-4 space-y-4" method="POST">
             <?php if ($validacoes = flash()->get('validacoes_login')): ?>
 
-                <div class="border-red-800 bg-red-900 text-red-400 px-4 py-1 rounded-md border-2 text-sm font-bold">
+               <div class="border-red-800 bg-red-900 text-green px-3 py-2 rounded-md border-2 text-sm font-bold">
 
                     <ul>
 
-                        <li>Deu ruim!!</li>
+                        <li>Erros:</li>
 
                         <?php foreach ($validacoes as $validacao): ?>
 
@@ -24,12 +24,12 @@
             <?php endif; ?>
             <div class="flex flex-col">
                 <label class="text-stone-400 mb-1">Email</label>
-                <input type="email" name="email" required placeholder="Email"
+                <input type="email" name="email" placeholder="Email"
                     class="border-stone-800 border-2 rounded-md bg-stone-900 text-sm focus:outline-none px-2 py-1 w-full" />
             </div>
             <div class="flex flex-col">
                 <label class="text-stone-400 mb-1">Senha</label>
-                <input type="password" name="password" required placeholder="Senha"
+                <input type="password" name="password" placeholder="Senha"
                     class="border-stone-800 border-2 rounded-md bg-stone-900 text-sm focus:outline-none px-2 py-1 w-full" />
             </div>
             <button type="submit" class="border-stone-800 bg-stone-900 px-3 py-2 rounded-md border-2 font-bold

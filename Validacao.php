@@ -47,6 +47,23 @@ class Validacao {
 
     }
 
+    private function unique($table, $campo, $valor){
+        if(strlen($valor == 0)) {
+            return;
+        }
+
+        $results = (new DB)->query(
+            query: "select * from $table where $campo = :valor",
+            params: ['valor' => $valor],
+
+        )->fetch();
+
+
+        if($results){
+            $this->validacoes[] = "O $campo já está sendo usado.";
+        }
+    }
+
     private function required($campo, $valor)
     {
 
