@@ -1,34 +1,4 @@
-<?php 
-
-    $sumNotas = array_reduce($avaliacoes, function($carry, $a){
-        return ($carry ?? 0) + $a->note;
-    }) ?? 0;
-
-    $totalAvaliacoes = count($avaliacoes);
-    $mediaNotas = $totalAvaliacoes > 0 ? round($sumNotas / $totalAvaliacoes) : 0;
-    $notaFinal = str_repeat("⭐", $mediaNotas);
-
-?>
-
-<div class="p-2 rounded border-stone-800 border-2 bg-stone-900">
-
-    <div class="flex">
-
-        <div class="w-1/3">Imagem</div>
-
-        <div class="space-y-1">
-
-            <a href="/livro?id=<?= $livro->id ?>" class="font-semibold hover:underline"><?= $livro->title; ?></a>
-            <div class="text-xs italic"><?= $livro->author; ?></div>
-            <div class="text-xs italic"><?=$notaFinal?>(<?=count($avaliacoes)?> Avaliações)</div>
-
-        </div>
-
-    </div>
-
-    <div class="text-sm mt-2"><?= $livro->description; ?></div>
-
-</div>
+<?php require_once 'partials/_livro.php'; ?>
 
 <h2>Avaliações</h2>
 <div class="grid grid-cols-4 gap-4" >
