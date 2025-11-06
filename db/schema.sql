@@ -36,6 +36,7 @@ CREATE TABLE IF NOT EXISTS `bookwise-db`.`books` (
   `description` TEXT NOT NULL,
   `release_year` INT NOT NULL,
   `user_id` INT NOT NULL,
+  `image` VARCHAR(255),
   PRIMARY KEY (`id`),
   UNIQUE INDEX `ID_UNIQUE` (`id` ASC),
   FOREIGN KEY (`user_id`) REFERENCES `bookwise-db`.`users`(`id`)
