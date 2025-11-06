@@ -14,7 +14,7 @@ CREATE SCHEMA IF NOT EXISTS `bookwise-db` DEFAULT CHARACTER SET utf8mb4 COLLATE 
 USE `bookwise-db`;
 
 -- -----------------------------------------------------
--- Table `estacionar-db`.`users`
+-- Table `bookwise-db`.`users`
 -- -----------------------------------------------------
 
 CREATE TABLE IF NOT EXISTS `bookwise-db`.`users` (
@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `bookwise-db`.`users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- -----------------------------------------------------
--- Table `estacionar-db`.`books`
+-- Table `bookwise-db`.`books`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bookwise-db`.`books` (
   `id` INT NOT NULL AUTO_INCREMENT,
@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `bookwise-db`.`books` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- -----------------------------------------------------
--- Table `estacionar-db`.`reviews`
+-- Table `bookwise-db`.`reviews`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bookwise-db`.`reviews` (
   `id` INT NOT NULL AUTO_INCREMENT,
