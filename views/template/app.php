@@ -47,7 +47,7 @@
 
         <?php endif; ?>
 
-        <?php require "views/{$view}.view.php"; ?>
+        <?php require "../views/{$view}.view.php"; ?>
         <!-- Estou requisitando de views a minha view, essa variavel view eu recupero da minha superglobal-->
 
 

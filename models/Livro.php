@@ -9,6 +9,7 @@ class Livro{
     public $user_id;
     public $note_rating;
     public $count_rating;
+    public $image;
 
     public function query($where, $params)
     {
@@ -24,6 +25,7 @@ class Livro{
                     l.author,
                     l.description,
                     l.release_year,
+                    l.image,
                     round(sum(a.note) / 5.0) as note_rating,
                     count(a.id) as count_rating
         
@@ -41,7 +43,9 @@ class Livro{
                     l.title,
                     l.author,
                     l.description,
-                    l.release_year;
+                    l.release_year,
+                    l.image;
+
         
             ",
         

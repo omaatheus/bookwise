@@ -27,11 +27,18 @@ if($validacao->naoPassou()){
     header('location: /meus-livros');
     exit();
 }
+$novoNome = md5(rand());
+
+$extensao = pathinfo($_FILES['imagem']['name'], PATHINFO_EXTENSION);
+
+$imagem = "images/$novoNome.$extensao";
+
+move_uploaded_file($_FILES['imagem']['tmp_name'], __DIR__ . '/../public/'.$imagem);
 
 (new DB)->query(
-    query: "INSERT INTO books (title, author, description, release_year, user_id)
-            VALUES (:titulo, :autor, :descricao, :ano_de_lancamento, :usuario_id)",
-    params: compact('titulo', 'autor', 'descricao', 'ano_de_lancamento', 'usuario_id'),
+    query: "INSERT INTO books (title, author, description, release_year, user_id, image)
+            VALUES (:titulo, :autor, :descricao, :ano_de_lancamento, :usuario_id, :imagem)",
+    params: compact('titulo', 'autor', 'descricao', 'ano_de_lancamento', 'usuario_id', 'imagem'),
 );
 
 flash()->push('mensagem', 'Livro cadastrado com sucesso!');
